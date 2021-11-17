@@ -190,6 +190,10 @@ main {
         img {
           flex: 0 1 0;
         }
+
+        &:hover {
+          opacity: 0.5;
+        }
       }
     }
   }
