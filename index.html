@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Base Apparel coming soon page</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.min.css">
+</head>
+
+<body>
+  <header role="banner">
+    <div class="container">
+      <img src="images/logo.svg" alt="logo">
+    </div>
+  </header>
+  <main role="main">
+    <div class="img-box">
+      <picture>
+        <source media="(min-width: 610px)" srcset="images/hero-desktop.jpg">
+        <img src="images/hero-mobile.jpg" alt="">
+      </picture>
+    </div>
+    <div class="content">
+      <div class="container">
+        <h1>We're<br />
+          <em>coming<br />
+            soon</em>
+        </h1>
+
+        <p class="message">Hello fellow shoppers! We're currently building our new fashion store.
+          Add your email below to stay up-to-date with announcements and our launch deals.</p>
+
+        <form id="form" novalidate>
+          <div class="input-group">
+            <input id="email" class="email" type="email" name="email" id="" placeholder="Email Address" required />
+            <div class="error-icon">
+              <img src="images/icon-error.svg" alt="">
+            </div>
+            <button class="btn"><img src="images/icon-arrow.svg" alt="" /></button>
+          </div>
+          <p class="error-message">Please provide a valid email</p>
+        </form>
+        <form action=""></form>
+      </div>
+
+      <footer>
+        <p class="attribution">
+          Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+          Coded by <a href="#">Rod</a>.
+        </p>
+      </footer>
+    </div>
+
+  </main>
+
+  <script>
+    const email = document.getElementById('email');
+    const form = document.getElementById('form');
+
+
+    function showEmailError() {
+      email.classList.add("with-error");
+      document.querySelector(".error-icon").style.visibility = "visible";
+      document.querySelector(".error-message").style.visibility = "visible";
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+
+      if (email.validity.valueMissing || !email.validity.valid) {
+        showEmailError();
+      }
+    })
+
+  </script>
+</body>
+
+</html>
