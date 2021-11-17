@@ -1,0 +1,271 @@
+@use "sass:math";
+
+@function fluid($min, $max, $minvw: 375px, $maxvw: 1440px) {
+  @return calc(
+    #{$min} + (#{math.div($max - $min, 1px)}) * ((100vw - #{$minvw}) /
+          (#{math.div($maxvw - $minvw, 1px)}))
+  );
+}
+
+$font-wt-lt: 300;
+$font-wt-reg: 400;
+$font-wt-bold: 600;
+$color-red-desat: hsl(0, 36%, 70%);
+$color-red-soft: hsl(0, 93%, 68%);
+$color-red-dark-gray: hsl(0, 6%, 24%);
+$color-gradient1: linear-gradient(
+  135deg,
+  hsl(0, 0%, 100%) 0%,
+  hsl(0, 100%, 98%) 100%
+);
+$color-gradient2: linear-gradient(
+  135deg,
+  hsl(0, 80%, 86%) 0%,
+  hsl(0, 74%, 74%) 100%
+);
+
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  vertical-align: middle;
+  width: 100%;
+}
+
+:root {
+  font-size: 16px;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+body {
+  color: $color-red-desat;
+}
+
+.container {
+  padding-left: fluid(32px, 165px);
+  padding-right: fluid(32px, 165px);
+  width: 100%;
+  margin: 0 auto;
+}
+
+header {
+  position: absolute;
+  z-index: 1;
+  height: fluid(84px, 164px);
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  img {
+    width: fluid(100px, 158px);
+  }
+}
+
+main {
+  position: relative;
+  padding-top: fluid(84px, 164px);
+  padding-bottom: 72px;
+  background-image: $color-gradient1;
+  text-align: center;
+
+  .img-box {
+    height: fluid(250px, 800px, 375px, 1199px);
+    overflow: hidden;
+  }
+
+  .content {
+    padding-top: 66px;
+
+    h1 {
+      font-size: fluid(34px, 64px);
+      font-weight: $font-wt-lt;
+      text-transform: uppercase;
+      letter-spacing: 16px;
+      line-height: 1.15;
+      margin-bottom: 24px;
+
+      em {
+        font-style: normal;
+        font-weight: $font-wt-bold;
+        color: $color-red-dark-gray;
+      }
+    }
+
+    .message {
+      font-size: fluid(14px, 16px);
+      line-height: 1.5;
+      margin-bottom: 36px;
+    }
+
+    form {
+      width: 100%;
+      margin-bottom: 0;
+
+      .input-group {
+        position: relative;
+      }
+
+      .email,
+      .btn {
+        border-radius: 500px;
+      }
+
+      .email {
+        width: 100%;
+        border: 1px solid $color-red-desat;
+        background-color: transparent;
+        padding: 1rem fluid(104px, 140px) 1rem 1.5rem;
+        color: $color-red-desat;
+        font-family: inherit;
+        font-size: fluid(14px, 16px);
+
+        &::placeholder {
+          color: $color-red-desat;
+        }
+
+        &:focus,
+        &:active {
+          outline: $color-red-soft solid 2px;
+          border-color: transparent;
+        }
+
+        &.with-error {
+          outline: $color-red-soft solid 2px;
+          border-color: transparent;
+        }
+      }
+
+      .error-message {
+        visibility: hidden;
+        padding-top: 0.5rem;
+        padding-left: 1.5rem;
+        text-align: left;
+        font-size: fluid(11px, 14px);
+        color: $color-red-soft;
+      }
+
+      .error-icon {
+        position: absolute;
+        top: 0;
+        right: fluid(72px, 108px);
+        height: 100%;
+        visibility: hidden;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          height: 24px;
+          width: 24px;
+        }
+
+        &.hidden {
+          visibility: hidden;
+        }
+      }
+
+      .btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        height: 100%;
+        width: fluid(64px, 100px);
+        background-image: $color-gradient2;
+        border: none;
+        box-shadow: 0 1rem 1rem rgba($color-red-desat, 0.5);
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          flex: 0 1 0;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    padding-right: fluid(32px, 220px);
+    max-width: none;
+  }
+
+  main {
+    background-image: url(../images/bg-pattern-desktop.svg), $color-gradient1;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: left;
+
+    display: flex;
+
+    .img-box {
+      order: 1;
+      flex-basis: 610px;
+      flex-grow: 1;
+      flex-shrink: 0;
+      height: auto;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+@media (min-width: 1441px) {
+  main {
+    height: 100vh;
+
+    .img-box {
+      img {
+        height: 100%;
+        width: auto;
+      }
+    }
+
+    .content {
+      .message {
+        font-size: fluid(16px, 20px, 1440px, 1920px);
+      }
+
+      .email {
+        font-size: fluid(16px, 20px, 1440px, 1920px);
+      }
+    }
+  }
+}
+
+footer {
+  position: absolute;
+  bottom: 0.5rem;
+  width: 100%;
+}
+
+.attribution {
+  opacity: 0.5;
+  margin: 0 auto;
+  font-size: 11px;
+  text-align: center;
+  color: $color-red-dark-gray;
+}
+.attribution a {
+  color: $color-red-dark-gray;
+  color: $color-red-soft;
+  text-decoration: none;
+}
