@@ -25,8 +25,8 @@ Users should be able to:
 
 ### Screenshots
 
-![](./images/ss/375.jpg)\
-![](./images/ss/1440.jpg)
+![](./images/ss/375.JPG)\
+![](./images/ss/1440.JPG)
 
 ### Links
 
